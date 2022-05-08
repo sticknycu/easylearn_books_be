@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+
+  api_service:
+    image: "openjdk:17-jdk-oraclelinux8"
+    build: .
+    restart: "no"
+    command: java -jar docker-jar-file.jar
+    ports:
+      - 9091:9091
+    depends_on:
+      - postgres_db
+
+  postgres_db:
+    image: "postgres:latest"
+    restart: always
+    ports:
+      - 5433:5433
+    command: -p 5433
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: root
