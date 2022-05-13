@@ -8,9 +8,12 @@ EasyLearn-Books-Backend is part of EasyLearn and is the microservice which contr
 Stack used for the project is:
 
 * Java 17
-* Spring with Spring Boot, 2.6.6
+* Spring with Spring Boot, 2.6.7
+* Spring Native 0.11.4 & GraalVM Support
 * Postgres Database 14.1
+* Flyway
 * Docker with docker-compose and Dockerfile
+* DAOs
 <!--* Mocked Tests are maked with Mockito and JUnit 5
 * JaCoCo Plugin 0.8.8
 * MapStruct Plugin 1.4.2-Final
