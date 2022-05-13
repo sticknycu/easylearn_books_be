@@ -21,3 +21,9 @@ Stack used for the project is:
 * DTOs-->
 * Codacy for analyze, quality code and coverage tests
 * Github Actions
+
+When I writed code, I was careful to avoid some [pitfalls](https://thorben-janssen.com/lombok-hibernate-how-to-avoid-common-pitfalls/):
+- Don’t Use @EqualsAndHashCode
+- Be Careful with @ToString (Not use on @OneToMany and @ManyToOne)
+- Avoid @Data
+- Every Entity class should implement Serializable
