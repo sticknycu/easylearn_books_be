@@ -1,4 +1,4 @@
-package ro.nicolaemariusghergu.easylearn.books.dao;
+package ro.nicolaemariusghergu.easylearn.books.model.dao;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,29 +1,32 @@
-package ro.nicolaemariusghergu.easylearn.books.model;
+package ro.nicolaemariusghergu.easylearn.books.model.entities;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
-import ro.nicolaemariusghergu.easylearn.books.dao.AbstractEntity;
+import ro.nicolaemariusghergu.easylearn.books.model.dao.AbstractEntity;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
 @ToString
-@Table(name = "news_letters")
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "promotional_month")
 @AttributeOverride(name = "id", column = @Column(name = "book_id"))
-public class NewsLetter extends AbstractEntity {
+public class PromotionalMonth extends AbstractEntity {
+
+    @ToString.Exclude
+    @ManyToOne
+    @JoinColumn(name = "discount_id")
+    private Discount discount;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        NewsLetter that = (NewsLetter) o;
+        PromotionalMonth that = (PromotionalMonth) o;
         return id != null && Objects.equals(id, that.id);
     }
 

@@ -1,11 +1,11 @@
-package ro.nicolaemariusghergu.easylearn.books.model;
+package ro.nicolaemariusghergu.easylearn.books.model.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
-import ro.nicolaemariusghergu.easylearn.books.dao.AbstractEntity;
+import ro.nicolaemariusghergu.easylearn.books.model.dao.AbstractEntity;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;

@@ -1,34 +1,35 @@
-package ro.nicolaemariusghergu.easylearn.books.model;
+package ro.nicolaemariusghergu.easylearn.books.model.entities;
 
 import lombok.*;
 import org.hibernate.Hibernate;
-import ro.nicolaemariusghergu.easylearn.books.dao.AbstractEntity;
+import ro.nicolaemariusghergu.easylearn.books.model.dao.AbstractEntity;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.util.Objects;
 
-@Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "publish_houses")
-@AttributeOverride(name = "id", column = @Column(name = "publish_house_id"))
-public class PublishHouse extends AbstractEntity {
+@Entity
+@ToString
+@Table(name = "discounts")
+@AttributeOverride(name = "id", column = @Column(name = "discount_id"))
+public class Discount extends AbstractEntity {
 
-    @Column(name = "publish_house_name")
-    private String name;
+    @Column(name = "discount_value")
+    private BigDecimal value;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        PublishHouse that = (PublishHouse) o;
-        return id != null && Objects.equals(id, that.id);
+        Discount discount = (Discount) o;
+        return id != null && Objects.equals(id, discount.id);
     }
 
     @Override

@@ -1,8 +1,8 @@
-package ro.nicolaemariusghergu.easylearn.books.model;
+package ro.nicolaemariusghergu.easylearn.books.model.entities;
 
 import lombok.*;
 import org.hibernate.Hibernate;
-import ro.nicolaemariusghergu.easylearn.books.dao.AbstractEntity;
+import ro.nicolaemariusghergu.easylearn.books.model.dao.AbstractEntity;
 
 import javax.persistence.*;
 import java.util.Objects;

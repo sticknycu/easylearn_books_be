@@ -14,10 +14,17 @@ Stack used for the project is:
 * Flyway
 * Docker with docker-compose and Dockerfile
 * DAOs
+* MapStruct Plugin 1.4.2-Final
+* DTOs
 <!--* Mocked Tests are maked with Mockito and JUnit 5
 * JaCoCo Plugin 0.8.8
-* MapStruct Plugin 1.4.2-Final
 * OpenFeign 3.1.1
-* DTOs-->
+-->
 * Codacy for analyze, quality code and coverage tests
 * Github Actions
+
+When I writed code, I was careful to avoid some [pitfalls](https://thorben-janssen.com/lombok-hibernate-how-to-avoid-common-pitfalls/):
+- Don’t Use @EqualsAndHashCode
+- Be Careful with @ToString (Not use on @OneToMany and @ManyToOne)
+- Avoid @Data
+- Every Entity class should implement Serializable
