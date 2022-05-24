@@ -16,10 +16,8 @@ Stack used for the project is:
 * DAOs
 * MapStruct Plugin 1.4.2-Final
 * DTOs
-<!--* Mocked Tests are maked with Mockito and JUnit 5
 * JaCoCo Plugin 0.8.8
-* OpenFeign 3.1.1
--->
+* Mocked Tests are maked with Mockito and JUnit 5
 * Codacy for analyze, quality code and coverage tests
 * Github Actions
 
