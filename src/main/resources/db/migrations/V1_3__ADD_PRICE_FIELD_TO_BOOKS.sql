@@ -1,0 +1,3 @@
+ALTER TABLE books
+    ADD COLUMN price DECIMAL,
+    ADD COLUMN title VARCHAR(30);

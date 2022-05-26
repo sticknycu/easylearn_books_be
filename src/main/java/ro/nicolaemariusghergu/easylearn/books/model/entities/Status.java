@@ -8,7 +8,6 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -28,7 +27,7 @@ public class Status extends AbstractEntity {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Status status = (Status) o;
-        return id != null && Objects.equals(id, status.id);
+        return statusType.equals(status.getStatusType());
     }
 
     @Override

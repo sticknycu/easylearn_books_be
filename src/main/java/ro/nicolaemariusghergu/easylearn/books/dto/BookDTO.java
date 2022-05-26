@@ -1,16 +1,25 @@
 package ro.nicolaemariusghergu.easylearn.books.dto;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import ro.nicolaemariusghergu.easylearn.books.model.dao.AbstractEntity;
 
-@Builder
+import java.math.BigDecimal;
+
+@SuperBuilder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(
+        exclude = {"category", "publishHouse", "discount", "status",
+                "author", "priceType", "stockCount", "iconUrl"},
+        callSuper = false
+)
 @ToString
 public class BookDTO extends AbstractEntity {
+
+    private String title;
 
     private CategoryDTO category;
 
@@ -24,5 +33,9 @@ public class BookDTO extends AbstractEntity {
 
     private Integer stockCount;
 
+    private AuthorDTO author;
+
     private String iconUrl;
+
+    private BigDecimal price;
 }

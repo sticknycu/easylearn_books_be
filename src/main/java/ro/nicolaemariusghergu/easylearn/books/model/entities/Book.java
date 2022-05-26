@@ -5,7 +5,7 @@ import org.hibernate.Hibernate;
 import ro.nicolaemariusghergu.easylearn.books.model.dao.AbstractEntity;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -48,12 +48,18 @@ public class Book extends AbstractEntity {
     @Column(name = "icon_url")
     private String iconUrl;
 
+    @Column(name = "price")
+    private BigDecimal price;
+
+    @Column(name = "title")
+    private String title;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Book book = (Book) o;
-        return id != null && Objects.equals(id, book.id);
+        return title.equals(book.title);
     }
 
     @Override

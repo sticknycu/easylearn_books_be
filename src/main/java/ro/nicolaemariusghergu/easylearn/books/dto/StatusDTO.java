@@ -1,14 +1,15 @@
 package ro.nicolaemariusghergu.easylearn.books.dto;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 public class StatusDTO extends AbstractEntityDTO {
 
     private String statusType;

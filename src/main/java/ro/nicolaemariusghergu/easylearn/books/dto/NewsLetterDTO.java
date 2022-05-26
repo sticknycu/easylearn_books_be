@@ -1,6 +1,7 @@
 package ro.nicolaemariusghergu.easylearn.books.dto;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import ro.nicolaemariusghergu.easylearn.books.model.dao.AbstractEntity;
 
 @Getter
@@ -8,7 +9,7 @@ import ro.nicolaemariusghergu.easylearn.books.model.dao.AbstractEntity;
 @ToString
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Builder
+@SuperBuilder
 public class NewsLetterDTO extends AbstractEntity {
 
 }

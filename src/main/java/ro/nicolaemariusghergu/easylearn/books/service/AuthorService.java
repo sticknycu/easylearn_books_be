@@ -8,4 +8,8 @@ import java.util.List;
 public interface AuthorService {
 
     ResponseEntity<List<AuthorDTO>> getAuthors();
+
+    void saveAuthors(List<AuthorDTO> authors);
+
+    List<AuthorDTO> getAuthorsFromRemote();
 }

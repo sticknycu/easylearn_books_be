@@ -8,7 +8,6 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.Objects;
 
 @Getter
 @Setter
@@ -28,7 +27,7 @@ public class Category extends AbstractEntity {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Category category = (Category) o;
-        return id != null && Objects.equals(id, category.id);
+        return name.equals(category.getName());
     }
 
     @Override

@@ -1,7 +1,12 @@
 package ro.nicolaemariusghergu.easylearn.books.service;
 
-import org.springframework.stereotype.Service;
+import ro.nicolaemariusghergu.easylearn.books.dto.CategoryDTO;
 
-@Service
+import java.util.List;
+
 public interface CategoryService {
+
+    void saveCategories(List<CategoryDTO> categories);
+
+    List<CategoryDTO> getCategoriesFromRemote();
 }

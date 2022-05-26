@@ -1,7 +1,12 @@
 package ro.nicolaemariusghergu.easylearn.books.service;
 
-import org.springframework.stereotype.Service;
+import ro.nicolaemariusghergu.easylearn.books.dto.BookDTO;
 
-@Service
+import java.util.List;
+
 public interface BookService {
+
+    void saveBooks(List<BookDTO> books);
+
+    List<BookDTO> getBooksFromRemote();
 }

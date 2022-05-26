@@ -1,7 +1,12 @@
 package ro.nicolaemariusghergu.easylearn.books.service;
 
-import org.springframework.stereotype.Service;
+import ro.nicolaemariusghergu.easylearn.books.dto.StatusDTO;
 
-@Service
+import java.util.List;
+
 public interface StatusService {
+
+    List<StatusDTO> getStatusFromRemote();
+
+    void saveStatuses(List<StatusDTO> statuses);
 }

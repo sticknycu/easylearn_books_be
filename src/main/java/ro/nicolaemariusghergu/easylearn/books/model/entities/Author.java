@@ -11,7 +11,6 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,7 +29,7 @@ public class Author extends AbstractEntity {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Author author = (Author) o;
-        return id != null && Objects.equals(id, author.id);
+        return name.equals(author.getName());
     }
 
     @Override

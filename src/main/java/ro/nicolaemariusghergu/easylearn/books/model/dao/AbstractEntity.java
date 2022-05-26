@@ -1,9 +1,9 @@
 package ro.nicolaemariusghergu.easylearn.books.model.dao;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
+import org.springframework.data.domain.Persistable;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,8 +15,11 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
+@SuperBuilder
 @MappedSuperclass
-public abstract class AbstractEntity implements Serializable {
+@NoArgsConstructor
+@AllArgsConstructor
+public abstract class AbstractEntity implements Serializable, Persistable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,5 +36,10 @@ public abstract class AbstractEntity implements Serializable {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    @Override
+    public boolean isNew() {
+        return id == null;
     }
 }
