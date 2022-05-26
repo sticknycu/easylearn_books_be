@@ -1,5 +1,6 @@
 package ro.nicolaemariusghergu.easylearn.books.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.nicolaemariusghergu.easylearn.books.dto.AuthorDTO;
@@ -8,8 +9,11 @@ import ro.nicolaemariusghergu.easylearn.books.service.AuthorService;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/authors/")
-public record AuthorController(AuthorService authorService) {
+public class AuthorController {
+
+    private final AuthorService authorService;
 
     @GetMapping("/v1")
     public ResponseEntity<List<AuthorDTO>> getAuthors() {
