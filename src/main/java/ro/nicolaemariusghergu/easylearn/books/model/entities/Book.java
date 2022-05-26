@@ -54,6 +54,11 @@ public class Book extends AbstractEntity {
     @Column(name = "title")
     private String title;
 
+    @ToString.Exclude
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id")
+    private Author author;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

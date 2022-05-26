@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @EqualsAndHashCode(
         exclude = {"category", "publishHouse", "discount", "status",
-                "author", "priceType", "stockCount", "iconUrl"},
+                "author", "priceType", "stockCount", "iconUrl", "price"},
         callSuper = false
 )
 @ToString
