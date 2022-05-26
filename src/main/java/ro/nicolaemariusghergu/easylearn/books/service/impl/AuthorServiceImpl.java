@@ -24,7 +24,8 @@ public class AuthorServiceImpl implements AuthorService {
     public ResponseEntity<List<AuthorDTO>> getAuthors() {
         return ResponseEntity.ok(authorRepository.findAll().stream()
                 .map(AuthorMapper.INSTANCE::authorToAuthorDto)
-                .toList());
+                .toList()
+                .stream().distinct().toList());
     }
 
     @Transactional

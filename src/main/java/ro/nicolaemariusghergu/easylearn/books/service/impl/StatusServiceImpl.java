@@ -1,6 +1,7 @@
 package ro.nicolaemariusghergu.easylearn.books.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -18,6 +19,14 @@ public class StatusServiceImpl implements StatusService {
 
     private final StatusRepository statusRepository;
     private final WebClient webClient;
+
+    @Override
+    public ResponseEntity<List<StatusDTO>> getStatuses() {
+        return ResponseEntity.ok(statusRepository.findAll().stream()
+                .map(StatusMapper.INSTANCE::statusToStatusDto)
+                .toList()
+                .stream().distinct().toList());
+    }
 
     @Override
     public List<StatusDTO> getStatusFromRemote() {

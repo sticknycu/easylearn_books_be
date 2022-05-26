@@ -1,6 +1,7 @@
 package ro.nicolaemariusghergu.easylearn.books.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -18,6 +19,14 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
     private final WebClient webClient;
+
+    @Override
+    public ResponseEntity<List<BookDTO>> getBooks() {
+        return ResponseEntity.ok(bookRepository.findAll().stream()
+                .map(BookMapper.INSTANCE::bookToBookDto)
+                .toList()
+                .stream().distinct().toList());
+    }
 
     @Transactional
     @Override

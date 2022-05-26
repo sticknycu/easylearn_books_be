@@ -1,7 +1,14 @@
 package ro.nicolaemariusghergu.easylearn.books.service;
 
-import org.springframework.stereotype.Service;
+import org.springframework.http.ResponseEntity;
+import ro.nicolaemariusghergu.easylearn.books.dto.PublishHouseDTO;
 
-@Service
+import java.util.List;
+
 public interface PublishHouseService {
+    ResponseEntity<List<PublishHouseDTO>> getPublishHouses();
+
+    List<PublishHouseDTO> getPublishHousesFromRemote();
+
+    void savePublishHouses(List<PublishHouseDTO> publishHouses);
 }

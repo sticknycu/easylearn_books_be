@@ -14,6 +14,7 @@ Stack used for the project is:
 * Flyway
 * Docker with docker-compose and Dockerfile
 * DAOs
+* Swagger
 * MapStruct Plugin 1.4.2-Final
 * DTOs
 * JaCoCo Plugin 0.8.8
