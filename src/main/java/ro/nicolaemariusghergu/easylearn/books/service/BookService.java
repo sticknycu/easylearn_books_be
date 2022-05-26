@@ -12,4 +12,10 @@ public interface BookService {
     void saveBooks(List<BookDTO> books);
 
     List<BookDTO> getBooksFromRemote();
+
+    ResponseEntity<?> addBook(BookDTO bookDTO);
+
+    ResponseEntity<?> modifyBook(Long id, BookDTO bookDTO);
+
+    ResponseEntity<?> deleteBook(Long id);
 }

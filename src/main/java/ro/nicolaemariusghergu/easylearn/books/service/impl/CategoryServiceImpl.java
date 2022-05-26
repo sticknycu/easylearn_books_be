@@ -1,6 +1,7 @@
 package ro.nicolaemariusghergu.easylearn.books.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,5 +47,45 @@ public class CategoryServiceImpl implements CategoryService {
                 .bodyToFlux(CategoryDTO.class)
                 .collectList()
                 .block();
+    }
+
+    @Override
+    public ResponseEntity<?> addCategory(CategoryDTO categoryDTO) {
+        if (categoryRepository.findAll().stream()
+                .filter(category -> category.getName().equals(category.getName()))
+                .toList()
+                .isEmpty()) {
+            categoryRepository.save(CategoryMapper.INSTANCE.categoryDtoToCategory(categoryDTO));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> modifyCategory(Long id, CategoryDTO categoryDTO) {
+        if (categoryRepository.findAll().stream()
+                .filter(category -> category.getName().equals(categoryDTO.getName()))
+                .toList()
+                .isEmpty()) {
+            categoryRepository.deleteById(id);
+            categoryRepository.save(CategoryMapper.INSTANCE.categoryDtoToCategory(categoryDTO));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> deleteCategory(Long id) {
+        if (!categoryRepository.findAll().stream()
+                .filter(status -> status.getId().equals(id))
+                .toList()
+                .isEmpty()) {
+            categoryRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

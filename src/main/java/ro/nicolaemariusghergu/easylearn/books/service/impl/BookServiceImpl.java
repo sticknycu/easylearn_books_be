@@ -1,6 +1,7 @@
 package ro.nicolaemariusghergu.easylearn.books.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,5 +47,45 @@ public class BookServiceImpl implements BookService {
                 .bodyToFlux(BookDTO.class)
                 .collectList()
                 .block();
+    }
+
+    @Override
+    public ResponseEntity<?> addBook(BookDTO bookDTO) {
+        if (bookRepository.findAll().stream()
+                .filter(book -> book.getTitle().equals(bookDTO.getTitle()))
+                .toList()
+                .isEmpty()) {
+            bookRepository.save(BookMapper.INSTANCE.bookDtoToBook(bookDTO));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> modifyBook(Long id, BookDTO bookDTO) {
+        if (bookRepository.findAll().stream()
+                .filter(book -> book.getTitle().equals(bookDTO.getTitle()))
+                .toList()
+                .isEmpty()) {
+            bookRepository.deleteById(id);
+            bookRepository.save(BookMapper.INSTANCE.bookDtoToBook(bookDTO));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> deleteBook(Long id) {
+        if (!bookRepository.findAll().stream()
+                .filter(book -> book.getId().equals(id))
+                .toList()
+                .isEmpty()) {
+            bookRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

@@ -11,4 +11,10 @@ public interface PublishHouseService {
     List<PublishHouseDTO> getPublishHousesFromRemote();
 
     void savePublishHouses(List<PublishHouseDTO> publishHouses);
+
+    ResponseEntity<?> addPublishHouse(PublishHouseDTO publishHouseDTO);
+
+    ResponseEntity<?> modifyPublishHouse(Long id, PublishHouseDTO publishHouseDTO);
+
+    ResponseEntity<?> deletePublishHouse(Long id);
 }

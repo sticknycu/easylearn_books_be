@@ -1,6 +1,7 @@
 package ro.nicolaemariusghergu.easylearn.books.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,5 +47,45 @@ public class StatusServiceImpl implements StatusService {
         statusRepository.saveAllAndFlush(statuses.stream()
                 .map(StatusMapper.INSTANCE::statusDtoToStatus)
                 .collect(Collectors.toSet()));
+    }
+
+    @Override
+    public ResponseEntity<?> addStatus(StatusDTO statusDTO) {
+        if (statusRepository.findAll().stream()
+                .filter(status -> status.getStatusType().equals(statusDTO.getStatusType()))
+                .toList()
+                .isEmpty()) {
+            statusRepository.save(StatusMapper.INSTANCE.statusDtoToStatus(statusDTO));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> modifyStatus(Long id, StatusDTO statusDTO) {
+        if (statusRepository.findAll().stream()
+                .filter(status -> status.getStatusType().equals(statusDTO.getStatusType()))
+                .toList()
+                .isEmpty()) {
+            statusRepository.deleteById(id);
+            statusRepository.save(StatusMapper.INSTANCE.statusDtoToStatus(statusDTO));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> deleteStatus(Long id) {
+        if (!statusRepository.findAll().stream()
+                .filter(status -> status.getId().equals(id))
+                .toList()
+                .isEmpty()) {
+            statusRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

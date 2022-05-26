@@ -1,6 +1,7 @@
 package ro.nicolaemariusghergu.easylearn.books.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +34,46 @@ public class PublishHouseServiceImpl implements PublishHouseService {
         publishHouseRepository.saveAllAndFlush(publishHouses.stream()
                 .map(PublishHouseMapper.INSTANCE::publishHouseDtoToPublishHouse)
                 .collect(Collectors.toSet()));
+    }
+
+    @Override
+    public ResponseEntity<?> addPublishHouse(PublishHouseDTO publishHouseDTO) {
+        if (publishHouseRepository.findAll().stream()
+                .filter(publishHouse -> publishHouse.getName().equals(publishHouseDTO.getName()))
+                .toList()
+                .isEmpty()) {
+            publishHouseRepository.save(PublishHouseMapper.INSTANCE.publishHouseDtoToPublishHouse(publishHouseDTO));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> modifyPublishHouse(Long id, PublishHouseDTO publishHouseDTO) {
+        if (publishHouseRepository.findAll().stream()
+                .filter(publishHouse -> publishHouse.getName().equals(publishHouseDTO.getName()))
+                .toList()
+                .isEmpty()) {
+            publishHouseRepository.deleteById(id);
+            publishHouseRepository.save(PublishHouseMapper.INSTANCE.publishHouseDtoToPublishHouse(publishHouseDTO));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> deletePublishHouse(Long id) {
+        if (!publishHouseRepository.findAll().stream()
+                .filter(publishHouse -> publishHouse.getId().equals(id))
+                .toList()
+                .isEmpty()) {
+            publishHouseRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @Override

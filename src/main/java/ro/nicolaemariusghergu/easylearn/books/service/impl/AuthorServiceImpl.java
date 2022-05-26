@@ -1,6 +1,7 @@
 package ro.nicolaemariusghergu.easylearn.books.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,5 +47,45 @@ public class AuthorServiceImpl implements AuthorService {
                 .bodyToFlux(AuthorDTO.class)
                 .collectList()
                 .block();
+    }
+
+    @Override
+    public ResponseEntity<?> addAuthor(AuthorDTO authorDTO) {
+        if (authorRepository.findAll().stream()
+                .filter(author -> author.getName().equals(authorDTO.getName()))
+                .toList()
+                .isEmpty()) {
+            authorRepository.save(AuthorMapper.INSTANCE.authorDtoToAuthor(authorDTO));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> modifyAuthor(Long id, AuthorDTO authorDTO) {
+        if (authorRepository.findAll().stream()
+                .filter(author -> author.getName().equals(authorDTO.getName()))
+                .toList()
+                .isEmpty()) {
+            authorRepository.deleteById(id);
+            authorRepository.save(AuthorMapper.INSTANCE.authorDtoToAuthor(authorDTO));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> deleteAuthor(Long id) {
+        if (!authorRepository.findAll().stream()
+                .filter(author -> author.getId().equals(id))
+                .toList()
+                .isEmpty()) {
+            authorRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

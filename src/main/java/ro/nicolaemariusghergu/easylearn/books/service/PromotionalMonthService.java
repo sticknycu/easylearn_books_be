@@ -1,7 +1,13 @@
 package ro.nicolaemariusghergu.easylearn.books.service;
 
-import org.springframework.stereotype.Service;
+import org.springframework.http.ResponseEntity;
+import ro.nicolaemariusghergu.easylearn.books.dto.PromotionalMonthDTO;
 
-@Service
 public interface PromotionalMonthService {
+
+    ResponseEntity<?> addPromotionalMonth(PromotionalMonthDTO promotionalMonthDTO);
+
+    ResponseEntity<?> modifyPromotionalMonth(Long id, PromotionalMonthDTO promotionalMonthDTO);
+
+    ResponseEntity<?> deletePromotionalMonth(Long id);
 }

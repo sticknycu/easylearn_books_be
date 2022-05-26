@@ -12,4 +12,10 @@ public interface AuthorService {
     void saveAuthors(List<AuthorDTO> authors);
 
     List<AuthorDTO> getAuthorsFromRemote();
+
+    ResponseEntity<?> addAuthor(AuthorDTO authorDTO);
+
+    ResponseEntity<?> modifyAuthor(Long id, AuthorDTO authorDTO);
+
+    ResponseEntity<?> deleteAuthor(Long id);
 }

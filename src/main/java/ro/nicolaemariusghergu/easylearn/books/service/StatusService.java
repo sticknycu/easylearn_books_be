@@ -12,4 +12,10 @@ public interface StatusService {
     List<StatusDTO> getStatusFromRemote();
 
     void saveStatuses(List<StatusDTO> statuses);
+
+    ResponseEntity<?> addStatus(StatusDTO statusDTO);
+
+    ResponseEntity<?> modifyStatus(Long id, StatusDTO statusDTO);
+
+    ResponseEntity<?> deleteStatus(Long id);
 }
